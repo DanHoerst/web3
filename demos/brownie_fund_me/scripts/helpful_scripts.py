@@ -1,5 +1,6 @@
 from brownie import accounts, config, MockV3Aggregator, network
 
+FORKED_LOCAL_ENVIRONMENTS = ["mainnet-fork", "mainnet-fork-dev"]
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["development", "ganache-local"]
 
 DECIMALS = 18
@@ -9,7 +10,7 @@ def get_account():
     # account = accounts.load("metamask-rinkeby")
     # account = accounts.add(config["wallets"]["from_key"])
     # account = accounts[0]
-    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
+    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS or network.show_active() in FORKED_LOCAL_ENVIRONMENTS:
         return accounts[0]
     else:
         return accounts.load("metamask-rinkeby")
